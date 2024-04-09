@@ -1,1 +1,308 @@
-<p>biashara-stimulus works!</p>
+<div class="row">
+    <div class="col-md-12 col-md-offset-3">
+
+        <form id="msform">
+            <h1 class="title">Biashara Stimulus Program MSEs Profiling For Nairobi City County</h1>
+            <!-- progressbar -->
+            <!-- <ul id="progressbar">
+                <li [ngClass]="step>=1 ? 'active ' : 'inactive'">Personal Details</li>
+                <li [ngClass]="step>=2 ? 'active' : 'inactive'">Address Details</li>
+                <li [ngClass]="step==3 ? 'active' : 'inactive'">Membership Details</li>
+            </ul> -->
+            <!-- fieldsets -->
+            <fieldset>
+
+                <h2 class="fs-title">Personal Details</h2>
+                <input type="text" formControlName="name" placeholder="Full Names" />
+                <input type="number" formControlName="id" name="id" placeholder="Identification Number" />
+                <div class="gender">
+                    <h4 class="radio-button-title">Gender</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button>Male</mat-radio-button>
+                        <mat-radio-button>Female</mat-radio-button>
+                        <mat-radio-button>Other</mat-radio-button>
+                    </mat-radio-group>
+
+                </div>
+
+                <div class="disability-status">
+                    <h4 class="radio-button-title">Disability Status</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button value="True">Yes</mat-radio-button>
+                        <mat-radio-button value="False">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <input type="email" formControlName="email" name="email" placeholder="Email" />
+                <input type="number" formControlName="phone" name="phone" placeholder="Phone Number" />
+
+                <div class="photo-upload">
+                    <h4 class="fs-subtitle radio-button-title">Upload your passport photo</h4>
+                    <input class="file-upload" type="file">
+
+                    <h4 class="fs-subtitle radio-button-title">Upload a copy of your National ID</h4>
+                    <input class="file-upload" type="file">
+                </div>
+
+
+
+                <!-- <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/> -->
+
+            </fieldset>
+        </form>
+
+
+        <form id="msform">
+
+            <!-- fieldsets -->
+            <fieldset>
+                <h2 class="fs-title">Business Specifics (Individual)</h2>
+
+
+                <!-- <h4 class="fs-subtitle radio-button-title">What is your Business Name</h4> -->
+                <input type="text" placeholder="Business Name">
+
+                <div class="businessRegisteration">
+                    <h4 class="fs-subtitle radio-button-title">Is your business registered</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button value="True">Yes</mat-radio-button>
+                        <mat-radio-button value="False">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="registerationCertificate">
+                    <h4 class="fs-subtitle radio-button-title">If yes attach the certificate of registration</h4>
+                    <input class="file-upload" type="file">
+                    <h4 class="fs-subtitle radio-button-title">If no explain why</h4>
+                    <input type="text" placeholder="">
+                </div>
+
+                <div class="businessLocation">
+                    <h4 class="fs-subtitle radio-button-title">What is your Business Location?</h4>
+                    <input type="text" placeholder="Sub County">
+                    <input type="text" placeholder="Ward">
+                    <input type="text" placeholder="Building">
+                    <input type="text" placeholder="Street">
+                    <input type="text" placeholder="Landmark">
+                </div>
+
+                <div class="businessSector">
+                    <h4 class="fs-subtitle radio-button-title">Sector of the business</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button>Retail</mat-radio-button>
+                        <mat-radio-button>Wholesale</mat-radio-button>
+                        <mat-radio-button>Service</mat-radio-button>
+                        <mat-radio-button>Juakali/cottage</mat-radio-button>
+                    </mat-radio-group>
+                    <input type="text" placeholder="Nature of the business (Specify)">
+                </div>
+
+                <div class="employees">
+                    <h4 class="fs-subtitle radio-button-title">Number of employees</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button>1-10</mat-radio-button>
+                        <mat-radio-button>11-50</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="businessOperation">
+                    <h4 class="fs-subtitle radio-button-title">How long has your business been in operation?</h4>
+                    <mat-form-field class="matFormField">
+                        <mat-label>Choose</mat-label>
+                        <mat-select>
+                            <mat-option value="option1">0-6 Months</mat-option>
+                            <mat-option value="option2">6-12 Months</mat-option>
+                            <mat-option value="option3">1-2 Years</mat-option>
+                            <mat-option value="option4">2-3 Years</mat-option>
+                            <mat-option value="option5">3 Years and Above</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+
+                <div class="businessChallenges">
+                    <h4 class="fs-subtitle radio-button-title">What are the primary challenges your business currently
+                        faces?</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button>Inadequate access to affordable capital</mat-radio-button>
+                        <mat-radio-button>Limited market access</mat-radio-button>
+                        <mat-radio-button>Inadequate business/ entrepreneur skills</mat-radio-button>
+                        <mat-radio-button>Other</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+
+
+                <div class="biasharaStimulusProgramme">
+                    <h4 class="fs-subtitle radio-button-title">Are you aware of Nairobi City County Biashara Stimulus
+                        Program?</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button value="True">Yes</mat-radio-button>
+                        <mat-radio-button value="False">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="sourceOfCapital">
+                    <h4 class="fs-subtitle radio-button-title">What is your source of capital?</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button>Own savings</mat-radio-button>
+                        <mat-radio-button>Family/Friend support</mat-radio-button>
+                        <mat-radio-button>Chama</mat-radio-button>
+                        <mat-radio-button>Loan</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="capitalAdequate">
+                    <h4 class="fs-subtitle radio-button-title">Is the capital adequate for expansion for your business?
+                    </h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button>Yes</mat-radio-button>
+                        <mat-radio-button>No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="marketProducts">
+                    <h4 class="fs-subtitle radio-button-title">How do you market your products?</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button>Virtual</mat-radio-button>
+                        <mat-radio-button>Physical</mat-radio-button>
+                        <mat-radio-button>Both</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="targetMarkets">
+                    <h4 class="fs-subtitle radio-button-title">What are your target markets?</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button>Local</mat-radio-button>
+                        <mat-radio-button>International</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="tradeExhibition">
+                    <h4 class="fs-subtitle radio-button-title">Have you participated in any trade fair/exhibition?</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button value="True">Yes</mat-radio-button>
+                        <mat-radio-button value="False">No</mat-radio-button>
+                    </mat-radio-group>
+                    <h4 class="fs-subtitle radio-button-title">If yes:</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button>Self-sponsored</mat-radio-button>
+                        <mat-radio-button>Sponsored</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="capacityBuildingTraining">
+                    <h4 class="fs-subtitle radio-button-title">Have you participated in any capacity building training?</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button value="True">Yes</mat-radio-button>
+                        <mat-radio-button value="False">No</mat-radio-button>
+                    </mat-radio-group>
+                    <h4 class="fs-subtitle radio-button-title">If yes:</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button>Self-sponsored</mat-radio-button>
+                        <mat-radio-button>Sponsored</mat-radio-button>
+                    </mat-radio-group>
+
+                </div>
+
+                <!-- <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                <input  (click)="next()" type="button" name="next" class="next action-button" value="Next"/> -->
+
+            </fieldset>
+        </form>
+
+
+
+        <form id="msform">
+            <fieldset>
+                <h2 class="fs-title">Business Specifics (Group/Organization)</h2>
+
+                <div class="organization">
+                    <h4 class="fs-subtitle radio-button-title">Are you in any registered common interest group/organization?</h4>
+                    <mat-radio-group class="radio-group-options" aria-label="Select an option">
+                        <mat-radio-button value="True">Yes</mat-radio-button>
+                        <mat-radio-button value="False">No</mat-radio-button>
+                    </mat-radio-group>
+
+                    <input type="text" placeholder="Group/Organization name">
+                    <input type="text" placeholder="Year of registration">
+                    <input type="number" placeholder="Chairperson’s Contact Number">
+                    <input type="number" placeholder="Number of group members">
+
+                    <div>
+                        <h4 class="fs-subtitle radio-button-title">Upload the list of the members</h4>
+                        <input type="file" class="file-upload"> 
+                    </div>
+
+                    <div>
+                        <h4 class="fs-subtitle radio-button-title">Attach Group Constitution</h4>
+                        <input type="file" class="file-upload">
+                    </div>
+
+                    <div>
+                        <h4 class="fs-subtitle radio-button-title">Attach Certificate of registration</h4>
+                        <input type="file" class="file-upload">
+                    </div>
+                </div>
+
+                <div class="businessActivities">
+                    <h4 class="fs-subtitle radio-button-title">Group activity/Nature of business activities of the group members</h4>
+                      <div class="checkboxContainer">
+                    <mat-checkbox >Car Wash</mat-checkbox>
+                    <mat-checkbox >Metal works/ Furniture</mat-checkbox>
+                    <mat-checkbox >Fish mongering</mat-checkbox>
+                    <mat-checkbox >Health Care</mat-checkbox>
+                    <mat-checkbox >Waste recyclers/ CBOs</mat-checkbox>
+                    <mat-checkbox >Tailoring/ Basket Making</mat-checkbox>
+                    <mat-checkbox >Hawking</mat-checkbox>
+                    <mat-checkbox >Juice making</mat-checkbox>
+                    <mat-checkbox >Salon/ nail salon</mat-checkbox>
+                    <mat-checkbox >Chicken farming</mat-checkbox>
+                    <mat-checkbox>Mechanics</mat-checkbox>
+                    <mat-checkbox>Shoe shiners</mat-checkbox>
+                    <mat-checkbox>Catering</mat-checkbox>
+                    <mat-checkbox>Boda Boda</mat-checkbox>
+                    <mat-checkbox>Leather Shoe makers</mat-checkbox>
+                    <mat-checkbox>Cleaning services</mat-checkbox>
+                    <mat-checkbox>Arts and Entertainment</mat-checkbox>
+                    <mat-checkbox>Day care</mat-checkbox>
+                    <mat-checkbox>Masonry</mat-checkbox>
+                    <mat-checkbox>Textile</mat-checkbox>
+                    <mat-checkbox>Jua Kali</mat-checkbox>
+                    <mat-checkbox>General Merchandise</mat-checkbox>
+                    <mat-checkbox>Other: </mat-checkbox>
+
+                </div>
+
+                <div class="businessOutCome">
+                    <h4 class="fs-subtitle radio-button-title">What positive outcomes or changes do you expect for your business as a beneficiary of Biashara Stimulus Program?</h4>
+                    <div class="checkboxContainer">
+                        <mat-checkbox>Increased working capital</mat-checkbox>
+                        <mat-checkbox>Access to more customers</mat-checkbox>
+                        <mat-checkbox>Enhanced business/ entrepreneurial skill</mat-checkbox>
+                        <mat-checkbox>Increased business income</mat-checkbox>
+                        <mat-checkbox>More employment opportunities.</mat-checkbox>
+                        <mat-checkbox>Better livelihood</mat-checkbox>
+                        <mat-checkbox>Other:</mat-checkbox>
+
+                    </div>
+                </div>
+
+                <div class="businessComments">
+                    <h4 class="fs-subtitle radio-button-title">Do you have any additional comments, suggestions, or concerns regarding Biashara Stimulus program?</h4>
+                    <textarea name="" id="" cols="10" rows="5"></textarea>
+
+                </div>
+                    
+            </div>
+
+
+                
+            <!-- <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/> -->
+            <input type="submit" name="submit" class="submit action-submit" value="Submit"/>
+
+            </fieldset>
+
+        </form>
+    </div>
+</div>
