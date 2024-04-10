@@ -2,12 +2,9 @@ from django.db import models
 from multiselectfield import MultiSelectField
 from django.contrib.postgres.fields import JSONField
 import json
+import datetime
+from django.core.validators import RegexValidator, MaxValueValidator, MinValueValidator
 # Create your models here.
-class Activity(models.Model):
-    name=models.CharField(max_length=100)
-    def __str__(self) -> str:
-        return self.name
-    
 class MSEData(models.Model):
     
     STATUS = [
@@ -28,22 +25,22 @@ class MSEData(models.Model):
     ]
     Subcounties=[
         
-    (" Dagoretti South",  " Dagoretti South"),
-     (" Dagoretti North",  " Dagoretti North"),
-  ( " Embakasi East", " Embakasi East"),
-   ( " Embakasi Central", " Embakasi Central"),
-   (" Embakasi North", " Embakasi North"),
+    ("Dagoretti South",  "Dagoretti South"),
+     ("Dagoretti North",  "Dagoretti North"),
+  ( "Embakasi East", "Embakasi East"),
+   ( "Embakasi Central", "Embakasi Central"),
+   ("Embakasi North", "Embakasi North"),
    ( "Embakasi West", "Embakasi West"),
     ( "Embakasi South", "Embakasi South"),
-   (" Kamukunji", " Kamukunji"),
-  ( " Kasarani", " Kasarani"),
-   (" Kibra", " Kibra"),
-  ( " Langata", " Langata"),
+   ("Kamukunji", "Kamukunji"),
+  ( "Kasarani", "Kasarani"),
+   ("Kibra", "Kibra"),
+  ( "Langata", "Langata"),
    ( "Makadara","Makadara"),
-  ("  Mathare","  Mathare"),
-   (" Starehe", " Starehe"),
-   (" Westlands"," Westlands"),
-  ( "Roysambu"," Roysambu"),
+  ("Mathare","Mathare"),
+   ("Starehe", "Starehe"),
+   ("Westlands","Westlands"),
+  ( "Roysambu","Roysambu"),
    ("Ruaraka","Ruaraka"),
     ]
     SectorofBusiness=[
@@ -103,37 +100,18 @@ class MSEData(models.Model):
         (" Better livelihood","Better livelihood"),
         ("Other","Other")
     ]
-    ACTIVITY_CHOICES = [
-        ('Car Wash', 'Car Wash'),
-        ('Metal works/ Furniture', 'Metal works/ Furniture'),
-        ('Fish mongering', 'Fish mongering'),
-        ('Health Care', 'Health Care'),
-        ('Waste recyclers/ CBOs', 'Waste recyclers/ CBOs'),
-        ('Tailoring/ Basket Making', 'Tailoring/ Basket Making'),
-        ('Hawking', 'Hawking'),
-        ('Juice making', 'Juice making'),
-        ('Salon/ nail salon', 'Salon/ nail salon'),
-        ('Chicken farming', 'Chicken farming'),
-        ('Mechanics', 'Mechanics'),
-        ('Shoe shiners', 'Shoe shiners'),
-        ('Catering', 'Catering'),
-        ('Boda Boda', 'Boda Boda'),
-        ('Leather Shoe makers', 'Leather Shoe makers'),
-        ('Cleaning services', 'Cleaning services'),
-        ('Arts and Entertainment', 'Arts and Entertainment'),
-        ('Day care', 'Day care'),
-        ('Masonry', 'Masonry'),
-        ('Jua Kali', 'Jua Kali'),
-        ('General Merchandise', 'General Merchandise'),
-        ('Other', 'Other')
-    ]
+    phone_number_validator = RegexValidator(
+        regex=r'^0\d{9}$',  # Regular expression: starts with 0, followed by 9 digits
+        message='Phone number must start with 0 and have a total of 10 digits.'
+    )
+    
     fullName = models.CharField(max_length=255)
     identificationNumber = models.IntegerField(null=True)
     gender=models.CharField(max_length=25,choices=Gender)
     other_gender = models.CharField(max_length=25,blank=True)
-    diasabilityStatus=models.CharField(max_length=25,choices=STATUS)
+    disabilityStatus=models.CharField(max_length=25,choices=STATUS)
     email = models.EmailField(unique=True)
-    phoneNumber= models.CharField(max_length=20)
+    phoneNumber= models.CharField(max_length=20,validators=[phone_number_validator])
     passportPhoto=models.FileField(upload_to='media/passport/')
     nationalIDPhoto=models.FileField(upload_to="media/nationalid/")
     businessName=models.CharField(max_length=30)
@@ -162,7 +140,7 @@ class MSEData(models.Model):
     capacityTrainingParticipation=models.CharField(max_length=25,choices=CapacityBuildingTraining ,null=True)
     isGroupRegistered=models.CharField(max_length=25,choices=STATUS,null=True)
     groupName=models.CharField(max_length=20)
-    year_registered=models.DateTimeField()
+    year_registered=models.IntegerField(blank=True,null=True,validators=[MinValueValidator(2000), MaxValueValidator(datetime.date.today().year)])
     chairpersonsContact=models.CharField(max_length=20)
     numberofGroupmemb=models.IntegerField()
     listOfGroupmembers=models.FileField(upload_to='media/groupmembers/', blank=True, null=True)

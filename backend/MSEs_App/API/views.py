@@ -13,12 +13,48 @@ class MSEsProfilingViewSet(viewsets.ViewSet):
             serializer = MSEDataSerializer(queryset, many=True)
             return Response(serializer.data)
 
-    @action(detail=False,methods=['POST'])
+    
     def create(self, request):
         if request.method == 'POST':
+            is_business_registered = self.request.data.get('isbusinessRegistered', None)
+            registration_certificate = self.request.data.get('registrationCertificate', None)
+            participatedintradefair=self.request.data.get('participatedintradefair', None)
+            tradefairParticipation=self.request.data.get('tradefairParticipation', None)
+            capacityBuildingTraining=self.request.data.get('capacityBuildingTraining', None)
+            capacityTrainingParticipation=self.request.data.get('capacityTraining', None)
             
+            
+            explain = self.request.data.get('explainWhy', None)
+            gender = request.data.get('gender', None)
+            other_gender = request.data.get('other_gender', None)
+            if gender == 'Other' and not other_gender:
+                return Response({"error": "If gender is specified as 'Other', you must provide details in the 'other_gender' field."},
+                                status=status.HTTP_400_BAD_REQUEST)
+            if gender in ['Male', 'Female'] and other_gender:
+                return Response({"error": "If gender is specified as 'Male' or 'Female', the 'other_gender' field should be empty."},
+                            status=status.HTTP_400_BAD_REQUEST)
            
-            payload=request.data
+            if is_business_registered == 'Yes' and not registration_certificate:
+                return Response({"error": "Registration certificate is required if business is registered."},
+                            status=status.HTTP_400_BAD_REQUEST)
+            if is_business_registered == 'NO':
+                if registration_certificate: 
+                    return Response({"error": "Registration certificate is required for only those whose business is registered."},
+                            status=status.HTTP_400_BAD_REQUEST)
+                if not explain:
+                    return Response({"error": "If business is not registered, explain why is required."},
+                                status=status.HTTP_400_BAD_REQUEST)
+            if  participatedintradefair == "Yes" and not tradefairParticipation:
+                return Response({"error": "kindly fill if tradefairParticipation is selfsponsored or sponsores"},
+                            status=status.HTTP_400_BAD_REQUEST)
+            if capacityBuildingTraining == "Yes" and not capacityTrainingParticipation:
+                return Response({"error": "kindly fill if tradefairParticipation is selfsponsored or sponsores"},
+                            status=status.HTTP_400_BAD_REQUEST)
+                
+
+
+           
+           
             serializer = MSEDataSerializer(data=request.data)
         
             if serializer.is_valid():
@@ -34,8 +70,8 @@ class MSEProfilingDetailViewSet(viewsets.ViewSet):
         try:
             stakeholder = MSEData.objects.get(pk=pk)
         except MSEData.DoesNotExist:
-            return Response({"message": "stakeholder details not found"}, status=status.HTTP_404_NOT_FOUND)
-        
+            return Response({"message": "MSE details not found"}, status=status.HTTP_404_NOT_FOUND)
+            
         serializer = MSEDataSerializer(stakeholder)
         return Response(serializer.data)
     @action(detail=True,methods=['PUT'])
@@ -43,8 +79,42 @@ class MSEProfilingDetailViewSet(viewsets.ViewSet):
         try:
             MSE = MSEData.objects.get(pk=pk)
         except MSEData.DoesNotExist:
-            return Response({"message": "Stakeholder details not found"}, status=status.HTTP_404_NOT_FOUND)
-
+            return Response({"message": "MSE details not found"}, status=status.HTTP_404_NOT_FOUND)
+        is_business_registered = self.request.data.get('isbusinessRegistered', None)
+        registration_certificate = self.request.data.get('registrationCertificate', None)
+        participatedintradefair=self.request.data.get('participatedintradefair', None)
+        tradefairParticipation=self.request.data.get('tradefairParticipation', None)
+        capacityBuildingTraining=self.request.data.get('capacityBuildingTraining', None)
+        capacityTrainingParticipation=self.request.data.get('capacityTraining', None)
+            
+            
+        explain = self.request.data.get('explainWhy', None)
+        gender = request.data.get('gender', None)
+        other_gender = request.data.get('other_gender', None)
+        if gender == 'Other' and not other_gender:
+                return Response({"error": "If gender is specified as 'Other', you must provide details in the 'other_gender' field."},
+                                status=status.HTTP_400_BAD_REQUEST)
+        if gender in ['Male', 'Female'] and other_gender:
+                return Response({"error": "If gender is specified as 'Male' or 'Female', the 'other_gender' field should be empty."},
+                            status=status.HTTP_400_BAD_REQUEST)
+           
+        if is_business_registered == 'Yes' and not registration_certificate:
+                return Response({"error": "Registration certificate is required if business is registered."},
+                            status=status.HTTP_400_BAD_REQUEST)
+        if is_business_registered == 'NO':
+                if registration_certificate: 
+                    return Response({"error": "Registration certificate is required for only those whose business is registered."},
+                            status=status.HTTP_400_BAD_REQUEST)
+        if not explain:
+                    return Response({"error": "If business is not registered, explain why is required."},
+                                status=status.HTTP_400_BAD_REQUEST)
+        if  participatedintradefair == "Yes" and not tradefairParticipation:
+                return Response({"error": "kindly fill if tradefairParticipation is selfsponsored or sponsored"},
+                            status=status.HTTP_400_BAD_REQUEST)
+        if capacityBuildingTraining == "Yes" and not capacityTrainingParticipation:
+                return Response({"error": "kindly fill if tradefairParticipation is selfsponsored or sponsored"},
+                            status=status.HTTP_400_BAD_REQUEST)   
+        
         serializer = MSEDataSerializer(MSE, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -59,7 +129,7 @@ class MSEProfilingDetailViewSet(viewsets.ViewSet):
         try:
             stakeholder = MSEData.objects.get(pk=pk)
         except MSEData.DoesNotExist:
-            return Response({"message": "stakeholder details not foud"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "MSE details not foud"}, status=status.HTTP_404_NOT_FOUND)
         
       
         stakeholder.delete()
