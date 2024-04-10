@@ -1,7 +1,15 @@
 from django.db import models
-
+from multiselectfield import MultiSelectField
+from django.contrib.postgres.fields import JSONField
+import json
 # Create your models here.
+class Activity(models.Model):
+    name=models.CharField(max_length=100)
+    def __str__(self) -> str:
+        return self.name
+    
 class MSEData(models.Model):
+    
     STATUS = [
         ('Yes', 'Yes'),
         ('No', 'No')
@@ -126,11 +134,11 @@ class MSEData(models.Model):
     diasabilityStatus=models.CharField(max_length=25,choices=STATUS)
     email = models.EmailField(unique=True)
     phoneNumber= models.CharField(max_length=20)
-    passportPhoto=models.FileField(upload_to='passport/')
-    nationalIDPhoto=models.FileField(upload_to="nationalid/")
+    passportPhoto=models.FileField(upload_to='media/passport/')
+    nationalIDPhoto=models.FileField(upload_to="media/nationalid/")
     businessName=models.CharField(max_length=30)
-    isbusinessRegistered=models.BooleanField(default=True)
-    registrationCertificate=models.FileField(upload_to='certificates/', blank=True, null=True)
+    isbusinessRegistered=models.CharField(max_length=20,choices=STATUS)
+    registrationCertificate=models.FileField(upload_to='media/businesscertificates/', blank=True, null=True)
     explainWhy=models.TextField(blank=True)
     subcounty=models.CharField(max_length=20,choices=Subcounties,null=True)
     ward = models.CharField(max_length=20)
@@ -140,34 +148,34 @@ class MSEData(models.Model):
     businessSector=models.CharField(max_length=25,choices=SectorofBusiness,null=True)
     natureofBusiness=models.TextField(max_length=50)
     numbofEmployees=models.IntegerField()
-    lengthofOPerations=models.IntegerField()
+    lengthofOperations=models.CharField(max_length=40,choices=LengthOfBusinessOperations)
     challenges=models.TextField(max_length=100,choices=BusinessChallenges,null=True)
-    otherChallenges=models.TextField(max_length=100,null=True)
-    awareofProgram=models.BooleanField()
+    otherChallenges=models.TextField(max_length=100,null=True,blank=True)
+    awareofProgram=models.CharField(max_length=100,choices=STATUS,null=True)
     sourceofCapital=models.CharField(max_length=30,choices=SourceofCapital,null=True)
-    capitalisAdequate=models.BooleanField()
+    capitalisAdequate=models.CharField(max_length=25,choices=STATUS)
     marketingProducts=models.CharField(max_length=20,choices=MarketProducts,null=True)
     targetMarket=models.CharField(max_length=25,choices=TargetMarket,null=True)
-    participatedintradefair=models.BooleanField()
+    participatedintradefair=models.CharField(max_length=25,choices=STATUS)
     tradefairParticipation=models.CharField(max_length=25,choices=TradefairParticipation,null=True)
-    capacityBuildingTraining=models.BooleanField()
+    capacityBuildingTraining=models.CharField(max_length=25,choices=STATUS)
     capacityTrainingParticipation=models.CharField(max_length=25,choices=CapacityBuildingTraining ,null=True)
-    isChamaRegistered=models.BooleanField()
+    isGroupRegistered=models.CharField(max_length=25,choices=STATUS,null=True)
     groupName=models.CharField(max_length=20)
     year_registered=models.DateTimeField()
     chairpersonsContact=models.CharField(max_length=20)
     numberofGroupmemb=models.IntegerField()
-    listOfGroupmembers=models.FileField(upload_to='groupmembers/', blank=True, null=True)
-    groupConsitution=models.FileField(upload_to='groupconstitution/', blank=True, null=True)
-    groupRegCert=models.FileField(upload_to='groupCertificate/', blank=True, null=True)
-    groupActivities=models.CharField(max_length=25,choices=ACTIVITY_CHOICES,null=True)
-    othergroupActivites=models.TextField(max_length=100,null=True)
+    listOfGroupmembers=models.FileField(upload_to='media/groupmembers/', blank=True, null=True)
+    groupConsitution=models.FileField(upload_to='media/groupconstitution/', blank=True, null=True)
+    groupRegCert=models.FileField(upload_to='media/groupCertificate/', blank=True, null=True)
+    groupActivities = models.JSONField(default=list,blank=True)
+    othergroupActivites=models.TextField(max_length=100,null=True,blank=True)
     expectations=models.CharField(max_length=50,choices=Expectations,null=True)
-    otherExpectations=models.TextField(max_length = 100,null=True)
+    otherExpectations=models.TextField(max_length = 100,null=True,blank=True)
     comments=models.TextField(max_length=50)
     
 
-
+    
     
     
     
