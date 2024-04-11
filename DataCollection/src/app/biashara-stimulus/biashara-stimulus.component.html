@@ -18,12 +18,12 @@
                 <div class="gender">
                     <h4 class="radio-button-title">Gender</h4>
                     <mat-radio-group formControlName="gender" class="radio-group-options" aria-label="Select an option">
-                        <mat-radio-button value="">Male</mat-radio-button>
-                        <mat-radio-button value="">Female</mat-radio-button>
-                        <mat-radio-button value="">Other</mat-radio-button>
+                        <mat-radio-button value="male">Male</mat-radio-button>
+                        <mat-radio-button value="female">Female</mat-radio-button>
+                        <mat-radio-button value="other">Other</mat-radio-button>
                     </mat-radio-group>
             
-                    <div class="matFormInput">
+                    <div class="matFormInput" *ngIf="personalDetails.get('gender')?.value === 'other'">
                         <input formControlName="other_gender" placeholder="">
                     </div>
                 </div>
@@ -32,8 +32,8 @@
                 <div class="disability-status">
                     <h4 class="radio-button-title">Disability Status</h4>
                     <mat-radio-group formControlName="disabilityStatus" class="radio-group-options" aria-label="Select an option">
-                        <mat-radio-button value="True">Yes</mat-radio-button>
-                        <mat-radio-button value="False">No</mat-radio-button>
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <mat-radio-button value="no">No</mat-radio-button>
                     </mat-radio-group>
                 </div>
             
@@ -64,14 +64,20 @@
                     <h4 class="fs-subtitle radio-button-title">Is your business registered</h4>
                     <mat-radio-group formControlName="isbusinessRegistered" class="radio-group-options"
                         aria-label="Select an option">
-                        <mat-radio-button value="True">Yes</mat-radio-button>
-                        <mat-radio-button value="False">No</mat-radio-button>
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <mat-radio-button value="no">No</mat-radio-button>
                     </mat-radio-group>
                 </div>
+                
+
+        
             
-                <div class="registerationCertificate">
+                <div class="registerationCertificate"  *ngIf="businessIndivual.get('isbusinessRegistered')?.value === 'yes'">
                     <h4 class="fs-subtitle radio-button-title">If yes attach the certificate of registration</h4>
                     <input formControlName="registrationCertificate" class="file-upload" type="file">
+                    </div>
+
+                <div class="explainwhy" *ngIf="businessIndivual.get('isbusinessRegistered')?.value === 'no'" >
                     <h4 class="fs-subtitle radio-button-title">If no explain why</h4>
                     <input formControlName="explainWhy" type="text" placeholder="">
                 </div>
@@ -88,19 +94,23 @@
                 <div class="businessSector">
                     <h4 class="fs-subtitle radio-button-title">Sector of the business</h4>
                     <mat-radio-group formControlName="businessSector" class="radio-group-options" aria-label="Select an option">
-                        <mat-radio-button value="">Retail</mat-radio-button>
-                        <mat-radio-button value="">Wholesale</mat-radio-button>
-                        <mat-radio-button value="">Service</mat-radio-button>
-                        <mat-radio-button value="">Juakali/cottage</mat-radio-button>
+                        <mat-radio-button value="retail">Retail</mat-radio-button>
+                        <mat-radio-button value="wholesale">Wholesale</mat-radio-button>
+                        <mat-radio-button value="service">Service</mat-radio-button>
+                        <mat-radio-button value="juakali">Juakali/cottage</mat-radio-button>
                     </mat-radio-group>
-                    <input formControlName="natureofBusiness" type="text" placeholder="Nature of the business (Specify)">
+                    <div class="specifyBusiness" >
+                        <h4 class="fs-subtitle radio-button-title">What is the nature of the business (Specify)?</h4>
+                        <input formControlName="natureofBusiness" type="text" placeholder="">
+                    </div>
+                    
                 </div>
             
                 <div class="employees">
                     <h4 class="fs-subtitle radio-button-title">Number of employees</h4>
                     <mat-radio-group formControlName="numbofEmployees" class="radio-group-options" aria-label="Select an option">
-                        <mat-radio-button value="">1-10</mat-radio-button>
-                        <mat-radio-button value="">11-50</mat-radio-button>
+                        <mat-radio-button value="1-10">1-10</mat-radio-button>
+                        <mat-radio-button value="11-50">11-50</mat-radio-button>
                     </mat-radio-group>
                 </div>
             
@@ -109,25 +119,27 @@
                     <mat-form-field class="matFormField">
                         <mat-label>Choose</mat-label>
                         <mat-select formControlName="lengthofOperations">
-                            <mat-option value="option1">0-6 Months</mat-option>
-                            <mat-option value="option2">6-12 Months</mat-option>
-                            <mat-option value="option3">1-2 Years</mat-option>
-                            <mat-option value="option4">2-3 Years</mat-option>
-                            <mat-option value="option5">3 Years and Above</mat-option>
+                            <mat-option value="0-6 Months">0-6 Months</mat-option>
+                            <mat-option value="6-12 Months">6-12 Months</mat-option>
+                            <mat-option value="1-2 Years">1-2 Years</mat-option>
+                            <mat-option value="2-3 Years">2-3 Years</mat-option>
+                            <mat-option value="3 Years and Above">3 Years and Above</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
             
                 <div class="businessChallenges">
-                    <h4 class="fs-subtitle radio-button-title">What are the primary challenges your business currently
-                        faces?</h4>
-                    <mat-radio-group formControlName="challenges" class="radio-group-options" aria-label="Select an option">
-                        <mat-radio-button value="">Inadequate access to affordable capital</mat-radio-button>
-                        <mat-radio-button value="">Limited market access</mat-radio-button>
-                        <mat-radio-button value="">Inadequate business/ entrepreneur skills</mat-radio-button>
-                        <mat-radio-button value="">Other</mat-radio-button>
-                    </mat-radio-group>
-                    <div class="">
+                        <div class="challenges" >
+                            <h4 class="fs-subtitle radio-button-title">What are the primary challenges your business currently
+                                faces?</h4>
+                            <mat-radio-group formControlName="challenges" class="radio-group-options" aria-label="Select an option">
+                                <mat-radio-button value="Inadequate access to affordable capital">Inadequate access to affordable capital</mat-radio-button>
+                                <mat-radio-button value="Limited market access">Limited market access</mat-radio-button>
+                                <mat-radio-button value="Inadequate business/ entrepreneur skills">Inadequate business/ entrepreneur skills</mat-radio-button>
+                                <mat-radio-button value="other">Other</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    <div class="inputChallenges"  *ngIf="businessIndivual.get('challenges')?.value === 'other'">
                         <input class="matFormInput" formControlName="otherChallenges" type="text">
                     </div>
                 </div>
@@ -138,18 +150,18 @@
                     <h4 class="fs-subtitle radio-button-title">Are you aware of Nairobi City County Biashara Stimulus
                         Program?</h4>
                     <mat-radio-group formControlName="awareofProgram" class="radio-group-options" aria-label="Select an option">
-                        <mat-radio-button value="True">Yes</mat-radio-button>
-                        <mat-radio-button value="False">No</mat-radio-button>
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <mat-radio-button value="no">No</mat-radio-button>
                     </mat-radio-group>
                 </div>
             
                 <div class="sourceOfCapital">
                     <h4 class="fs-subtitle radio-button-title">What is your source of capital?</h4>
                     <mat-radio-group formControlName="sourceofCapital" class="radio-group-options" aria-label="Select an option">
-                        <mat-radio-button value="">Own savings</mat-radio-button>
-                        <mat-radio-button value="">Family/Friend support</mat-radio-button>
-                        <mat-radio-button value="">Chama</mat-radio-button>
-                        <mat-radio-button value="">Loan</mat-radio-button>
+                        <mat-radio-button value="Own savings">Own savings</mat-radio-button>
+                        <mat-radio-button value="Family/Friend support">Family/Friend support</mat-radio-button>
+                        <mat-radio-button value="Chama">Chama</mat-radio-button>
+                        <mat-radio-button value="Loan">Loan</mat-radio-button>
                     </mat-radio-group>
                 </div>
             
@@ -157,25 +169,25 @@
                     <h4 class="fs-subtitle radio-button-title">Is the capital adequate for expansion for your business?
                     </h4>
                     <mat-radio-group formControlName="capitalisAdequate" class="radio-group-options" aria-label="Select an option">
-                        <mat-radio-button value="">Yes</mat-radio-button>
-                        <mat-radio-button value="">No</mat-radio-button>
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <mat-radio-button value="no">No</mat-radio-button>
                     </mat-radio-group>
                 </div>
             
                 <div class="marketProducts">
                     <h4 class="fs-subtitle radio-button-title">How do you market your products?</h4>
                     <mat-radio-group formControlName="marketingProducts" class="radio-group-options" aria-label="Select an option">
-                        <mat-radio-button>Virtual</mat-radio-button>
-                        <mat-radio-button>Physical</mat-radio-button>
-                        <mat-radio-button>Both</mat-radio-button>
+                        <mat-radio-button value="virtual">Virtual</mat-radio-button>
+                        <mat-radio-button value="physical">Physical</mat-radio-button>
+                        <mat-radio-button value="both">Both</mat-radio-button>
                     </mat-radio-group>
                 </div>
             
                 <div class="targetMarkets">
                     <h4 class="fs-subtitle radio-button-title">What are your target markets?</h4>
                     <mat-radio-group formControlName="targetMarket" class="radio-group-options" aria-label="Select an option">
-                        <mat-radio-button>Local</mat-radio-button>
-                        <mat-radio-button>International</mat-radio-button>
+                        <mat-radio-button value="local">Local</mat-radio-button>
+                        <mat-radio-button value="international">International</mat-radio-button>
                     </mat-radio-group>
                 </div>
             
@@ -183,30 +195,38 @@
                     <h4 class="fs-subtitle radio-button-title">Have you participated in any trade fair/exhibition?</h4>
                     <mat-radio-group formControlName="participatedintradefair" class="radio-group-options"
                         aria-label="Select an option">
-                        <mat-radio-button value="True">Yes</mat-radio-button>
-                        <mat-radio-button value="False">No</mat-radio-button>
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <mat-radio-button value="no">No</mat-radio-button>
                     </mat-radio-group>
-                    <h4 class="fs-subtitle radio-button-title">If yes:</h4>
-                    <mat-radio-group formControlName="tradefairParticipation" class="radio-group-options"
-                        aria-label="Select an option">
-                        <mat-radio-button>Self-sponsored</mat-radio-button>
-                        <mat-radio-button>Sponsored</mat-radio-button>
-                    </mat-radio-group>
+
+                    <div class="participated" *ngIf="businessIndivual.get('participatedintradefair')?.value === 'yes'">
+                        <h4 class="fs-subtitle radio-button-title">If yes:</h4>
+                        <mat-radio-group formControlName="tradefairParticipation" class="radio-group-options"
+                            aria-label="Select an option">
+                            <mat-radio-button value="self-sponsored">Self-sponsored</mat-radio-button>
+                            <mat-radio-button value="sponsored">Sponsored</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                   
                 </div>
             
                 <div class="capacityBuildingTraining">
                     <h4 class="fs-subtitle radio-button-title">Have you participated in any capacity building training?</h4>
                     <mat-radio-group formControlName="capacityBuildingTraining" class="radio-group-options"
                         aria-label="Select an option">
-                        <mat-radio-button value="True">Yes</mat-radio-button>
-                        <mat-radio-button value="False">No</mat-radio-button>
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <mat-radio-button value="no">No</mat-radio-button>
                     </mat-radio-group>
-                    <h4 class="fs-subtitle radio-button-title">If yes:</h4>
-                    <mat-radio-group formControlName="capacityTrainingParticipation" class="radio-group-options"
-                        aria-label="Select an option">
-                        <mat-radio-button>Self-sponsored</mat-radio-button>
-                        <mat-radio-button>Sponsored</mat-radio-button>
-                    </mat-radio-group>
+
+                    <div class="capacitybuilding" *ngIf="businessIndivual.get('capacityBuildingTraining')?.value === 'yes'" >
+                        <h4 class="fs-subtitle radio-button-title">If yes:</h4>
+                        <mat-radio-group formControlName="capacityTrainingParticipation" class="radio-group-options"
+                            aria-label="Select an option">
+                            <mat-radio-button value="self-sponsored">Self-sponsored</mat-radio-button>
+                            <mat-radio-button value="sponsored">Sponsored</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                   
                 </div>
             
                 <!-- <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
@@ -224,8 +244,8 @@
                 <div class="organization">
                     <h4 class="fs-subtitle radio-button-title">Are you in any registered common interest group/organization?</h4>
                     <mat-radio-group formControlName="isGroupRegistered" class="radio-group-options" aria-label="Select an option">
-                        <mat-radio-button value="True">Yes</mat-radio-button>
-                        <mat-radio-button value="False">No</mat-radio-button>
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <mat-radio-button value="no">No</mat-radio-button>
                     </mat-radio-group>
 
                     <input formControlName="groupName" type="text" placeholder="Group/Organization name">
@@ -251,36 +271,17 @@
 
                 <div class="businessActivities">
                     <h4 class="fs-subtitle radio-button-title">Group activity/Nature of business activities of the group members</h4>
-                    <div class="checkboxContainer">
-                    <mat-checkbox formControlName="carWash"  value="">Car Wash</mat-checkbox>
-                    <mat-checkbox formControlName="metalWorks" value="">Metal works/ Furniture</mat-checkbox>
-                    <mat-checkbox formControlName="fishMongering" value="">Fish mongering</mat-checkbox>
-                    <mat-checkbox formControlName="healthCare">Health Care</mat-checkbox>
-                    <mat-checkbox formControlName="wasteRecyclers">Waste recyclers/ CBOs</mat-checkbox>
-                    <mat-checkbox formControlName="tailoringBasketMaking" >Tailoring/ Basket Making</mat-checkbox>
-                    <mat-checkbox formControlName="hawking">Hawking</mat-checkbox>
-                    <mat-checkbox formControlName="juiceMaking">Juice making</mat-checkbox>
-                    <mat-checkbox formControlName="salonNail">Salon/ nail salon</mat-checkbox>
-                    <mat-checkbox formControlName="chickenFarming">Chicken farming</mat-checkbox>
-                    <mat-checkbox formControlName="Mechanics">Mechanics</mat-checkbox>
-                    <mat-checkbox formControlName="shoeShiners">Shoe shiners</mat-checkbox>
-                    <mat-checkbox formControlName="catering">Catering</mat-checkbox>
-                    <mat-checkbox formControlName="bodaboda">Boda Boda</mat-checkbox>
-                    <mat-checkbox formControlName="leatherShoeMakers">Leather Shoe makers</mat-checkbox>
-                    <mat-checkbox formControlName="cleaningServices">Cleaning services</mat-checkbox>
-                    <mat-checkbox formControlName="artAndEntertainment">Arts and Entertainment</mat-checkbox>
-                    <mat-checkbox formControlName="dayCare">Day care</mat-checkbox>
-                    <mat-checkbox formControlName="masonry">Masonry</mat-checkbox>
-                    <mat-checkbox formControlName="textile">Textile</mat-checkbox>
-                    <mat-checkbox formControlName="juakali">Jua Kali</mat-checkbox>
-                    <mat-checkbox formControlName="generalMerchandise">General Merchandise</mat-checkbox>
-                    <mat-checkbox formControlName="other">Other: </mat-checkbox>
+                 <div class="GroupActivities checkboxContainer">
 
-                    </div>
+                        <!-- checkboxes group activities -->
+                    <ng-select formControlName="groupActivities" [multiple]="true" [closeOnSelect]="false" [searchable]="true" (change)="onGroupActivitiesChange($event)">
+                          <ng-option *ngFor="let option of groupActivitiesOptions" [value]="option.id">{{ option.name }}</ng-option>
+                    </ng-select>
+                       <!--end of checkboxes group activities -->
+                      </div>
 
-    
-
-                    <div class="matFormInput">
+                    <div class="matFormInput" *ngIf="showOtherGroupActivities">
+                        <h4 class="fs-subtitle radio-button-title">What are other group activities</h4>
                         <input formControlName="othergroupActivites" type="text">
                     </div>
 
@@ -293,15 +294,15 @@
                 <div class="businessOutCome">
                     <h4 class="fs-subtitle radio-button-title">What positive outcomes or changes do you expect for your business as a beneficiary of Biashara Stimulus Program?</h4>
                     <div class="checkboxContainer">
-                        <mat-checkbox formControlName="increasedCapital">Increased working capital</mat-checkbox>
-                        <mat-checkbox formControlName="accessToCustomers">Access to more customers</mat-checkbox>
-                        <mat-checkbox formControlName="enhancedBusiness">Enhanced business/ entrepreneurial skill</mat-checkbox>
-                        <mat-checkbox formControlName="businessIncome">Increased business income</mat-checkbox>
-                        <mat-checkbox formControlName="employmentOpportunities">More employment opportunities.</mat-checkbox>
-                        <mat-checkbox formControlName="betterLivelihood">Better livelihood</mat-checkbox>
-                        <mat-checkbox formControlName="otherThingsExpected">Other:</mat-checkbox>
+                         <!-- checkbox box outcomes -->
+                <ng-select formControlName="expectations" [multiple]="true" [closeOnSelect]="false" [searchable]="true"  (change)="onExpectationChange($event)">
+                    <ng-option [value]="null" disabled>Choose</ng-option>
+                    <ng-option *ngFor="let option of businessOutcomeOptions" [value]="option.id">{{ option.name }}</ng-option>
+                </ng-select>
+                        <!--end of checkboxes business outcome -->
                     </div>
-                    <div class="matFormInput">
+                    <div class="matFormInput" *ngIf="showOtherOutcomeInputs">
+                        <h4 class="fs-subtitle radio-button-title">What are other postive outcomes</h4>
                         <input formControlName="otherExpectations" type="text">
                     </div>
                 </div>

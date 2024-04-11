@@ -147,6 +147,7 @@
     /* color: #666; */
     color: #003d1e;
     margin-bottom: 20px;
+    line-height: 1.6;
   }
   /*progressbar*/
   #progressbar {
@@ -293,6 +294,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 20px;
+    flex-wrap: wrap;
   }
 
   .matFormInput{
@@ -309,4 +312,10 @@
   }
   
 
+
+  .ng-select-material{
+    /* @import "../node_modules/@ng-select/ng-select/themes/default.theme.css"; */
+    text-align: left;
+   
+  }
  
