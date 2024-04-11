@@ -30,24 +30,24 @@ class MSEsProfilingViewSet(viewsets.ViewSet):
             if gender == 'Other' and not other_gender:
                 return Response({"error": "If gender is specified as 'Other', you must provide details in the 'other_gender' field."},
                                 status=status.HTTP_400_BAD_REQUEST)
-            if gender in ['Male', 'Female'] and other_gender:
+            if gender in ['male', 'female'] and other_gender:
                 return Response({"error": "If gender is specified as 'Male' or 'Female', the 'other_gender' field should be empty."},
                             status=status.HTTP_400_BAD_REQUEST)
            
-            if is_business_registered == 'Yes' and not registration_certificate:
+            if is_business_registered == 'yes' and not registration_certificate:
                 return Response({"error": "Registration certificate is required if business is registered."},
                             status=status.HTTP_400_BAD_REQUEST)
-            if is_business_registered == 'NO':
+            if is_business_registered == 'no':
                 if registration_certificate: 
                     return Response({"error": "Registration certificate is required for only those whose business is registered."},
                             status=status.HTTP_400_BAD_REQUEST)
                 if not explain:
                     return Response({"error": "If business is not registered, explain why is required."},
                                 status=status.HTTP_400_BAD_REQUEST)
-            if  participatedintradefair == "Yes" and not tradefairParticipation:
+            if  participatedintradefair == "yes" and not tradefairParticipation:
                 return Response({"error": "kindly fill if tradefairParticipation is selfsponsored or sponsores"},
                             status=status.HTTP_400_BAD_REQUEST)
-            if capacityBuildingTraining == "Yes" and not capacityTrainingParticipation:
+            if capacityBuildingTraining == "yes" and not capacityTrainingParticipation:
                 return Response({"error": "kindly fill if tradefairParticipation is selfsponsored or sponsores"},
                             status=status.HTTP_400_BAD_REQUEST)
                 
@@ -94,24 +94,24 @@ class MSEProfilingDetailViewSet(viewsets.ViewSet):
         if gender == 'Other' and not other_gender:
                 return Response({"error": "If gender is specified as 'Other', you must provide details in the 'other_gender' field."},
                                 status=status.HTTP_400_BAD_REQUEST)
-        if gender in ['Male', 'Female'] and other_gender:
+        if gender in ['male', 'female'] and other_gender:
                 return Response({"error": "If gender is specified as 'Male' or 'Female', the 'other_gender' field should be empty."},
                             status=status.HTTP_400_BAD_REQUEST)
            
-        if is_business_registered == 'Yes' and not registration_certificate:
+        if is_business_registered == 'yes' and not registration_certificate:
                 return Response({"error": "Registration certificate is required if business is registered."},
                             status=status.HTTP_400_BAD_REQUEST)
-        if is_business_registered == 'NO':
+        if is_business_registered == 'no':
                 if registration_certificate: 
                     return Response({"error": "Registration certificate is required for only those whose business is registered."},
                             status=status.HTTP_400_BAD_REQUEST)
                 if not explain:
                     return Response({"error": "If business is not registered, explain why is required."},
                                 status=status.HTTP_400_BAD_REQUEST)
-        if  participatedintradefair == "Yes" and not tradefairParticipation:
+        if  participatedintradefair == "yes" and not tradefairParticipation:
                 return Response({"error": "kindly fill if tradefairParticipation is selfsponsored or sponsored"},
                             status=status.HTTP_400_BAD_REQUEST)
-        if capacityBuildingTraining == "Yes" and not capacityTrainingParticipation:
+        if capacityBuildingTraining == "yes" and not capacityTrainingParticipation:
                 return Response({"error": "kindly fill if tradefairParticipation is selfsponsored or sponsored"},
                             status=status.HTTP_400_BAD_REQUEST)   
         

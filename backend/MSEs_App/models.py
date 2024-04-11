@@ -8,8 +8,8 @@ from django.core.validators import RegexValidator, MaxValueValidator, MinValueVa
 class MSEData(models.Model):
     
     STATUS = [
-        ('Yes', 'Yes'),
-        ('No', 'No')
+        ('yes', 'yes'),
+        ('no', 'no')
     ]
     
     
@@ -19,9 +19,9 @@ class MSEData(models.Model):
         ('5+', 'More than 5 years'),
     ]
     Gender = [
-        ('Male', 'Male'),
-        ('Female', 'Female'),
-        ('Other', 'Other'),
+        ('male', 'male'),
+        ('female', 'female'),
+        ('other', 'other'),
     ]
     Subcounties=[
         
@@ -44,10 +44,10 @@ class MSEData(models.Model):
    ("Ruaraka","Ruaraka"),
     ]
     SectorofBusiness=[
-        ("Retail","Retail"),
-        ("Wholesale","Wholesale"),
-        ("Service","Service"),
-        ("Juakali/cottage","Juakali/cottage")
+        ("retail","retail"),
+        ("wholesale","wholesale"),
+        ("service","service"),
+        ("juakali","juakali")
     
     ]
     NumberofEmployees = [
@@ -65,8 +65,8 @@ class MSEData(models.Model):
     BusinessChallenges=[
         ("Inadequate access to affordable capital", "Inadequate access to affordable capital"),
         ("Limited market access", "Limited market access"),
-         ("Inadequate business/entrepreneur skills", "Inadequate business/entrepreur skills"),
-         ("Other", "Other")        
+         ("Inadequate business/ entrepreneur skills", "Inadequate business/ entrepreur skills"),
+         ("other", "other")        
     ]
     SourceofCapital=[
         ("Own Savings", "Own Savings"),
@@ -75,21 +75,21 @@ class MSEData(models.Model):
         ("Loan", "Loan"),
     ]
     MarketProducts=[
-        ("Virtual","Virtual"),
-        ("Physical","Physical"),
-        ("Both","Both"),
+        ("virtual","virtual"),
+        ("physical","physical"),
+        ("both","both"),
     ]
     TargetMarket=[
-        ("Local","Local"),
-        ("International","International"),
+        ("local","local"),
+        ("international","international"),
     ]
     TradefairParticipation=[
-        ("Self-sponsored","Self-sponsored"),
-        ("Sponsored","Sponsored"),
+        ("self-sponsored","self-sponsored"),
+        ("sponsored","sponsored"),
     ]
     CapacityBuildingTraining=[
-        ("Self-sponsored","Self-sponsored"),
-        ("Sponsored","Sponsored")
+        ("self-sponsored","self-sponsored"),
+        ("sponsored","sponsored")
     ]
     Expectations=[
         ("Increased working capital","Increase working capital"),
@@ -110,13 +110,13 @@ class MSEData(models.Model):
     #identificationNumber=models.IntegerField(null=True)
     gender=models.CharField(max_length=25,choices=Gender)
     other_gender = models.CharField(max_length=25,blank=True)
-    disabilityStatus=models.CharField(max_length=25,choices=STATUS)
+    disabilityStatus=models.CharField(max_length=25,choices=STATUS,default=False,null=True)
     email = models.EmailField(unique=True)
     phoneNumber= models.CharField(max_length=20,validators=[phone_number_validator])
     passportPhoto=models.FileField(upload_to='media/passport/')
     nationalIDPhoto=models.FileField(upload_to="media/nationalid/")
     businessName=models.CharField(max_length=30)
-    isbusinessRegistered=models.CharField(max_length=20,choices=STATUS)
+    isbusinessRegistered=models.CharField(max_length=25,choices=STATUS,default=False,null=True)
     registrationCertificate=models.FileField(upload_to='media/businesscertificates/', blank=True, null=True)
     explainWhy=models.TextField(blank=True)
     subcounty=models.CharField(max_length=20,choices=Subcounties,null=True)
@@ -130,16 +130,16 @@ class MSEData(models.Model):
     lengthofOperations=models.CharField(max_length=40,choices=LengthOfBusinessOperations)
     challenges=models.TextField(max_length=100,choices=BusinessChallenges,null=True)
     otherChallenges=models.TextField(max_length=100,null=True,blank=True)
-    awareofProgram=models.CharField(max_length=100,choices=STATUS,null=True)
+    awareofProgram=models.CharField(max_length=25,choices=STATUS,default=False,null=True)
     sourceofCapital=models.CharField(max_length=30,choices=SourceofCapital,null=True)
-    capitalisAdequate=models.CharField(max_length=25,choices=STATUS)
+    capitalisAdequate=models.CharField(max_length=25,choices=STATUS,default=False,null=True)
     marketingProducts=models.CharField(max_length=20,choices=MarketProducts,null=True)
     targetMarket=models.CharField(max_length=25,choices=TargetMarket,null=True)
-    participatedintradefair=models.CharField(max_length=25,choices=STATUS)
+    participatedintradefair=models.CharField(max_length=25,choices=STATUS,default=False,null=True)
     tradefairParticipation=models.CharField(max_length=25,choices=TradefairParticipation,null=True)
-    capacityBuildingTraining=models.CharField(max_length=25,choices=STATUS)
+    capacityBuildingTraining=models.CharField(max_length=25,choices=STATUS,default=False,null=True)
     capacityTrainingParticipation=models.CharField(max_length=25,choices=CapacityBuildingTraining ,null=True,blank=True)
-    isGroupRegistered=models.CharField(max_length=25,choices=STATUS,null=True,blank=True)
+    isGroupRegistered=models.CharField(max_length=25,choices=STATUS,default=False,null=True)
     groupName=models.CharField(max_length=20)
     year_registered=models.IntegerField(blank=True,null=True,validators=[MinValueValidator(2000), MaxValueValidator(datetime.date.today().year)])
     chairpersonsContact=models.CharField(max_length=20)
@@ -149,7 +149,6 @@ class MSEData(models.Model):
     groupRegCert=models.FileField(upload_to='media/groupCertificate/', blank=True, null=True)
     groupActivities = models.JSONField(default=list,blank=True)
     othergroupActivites=models.TextField(max_length=100,null=True,blank=True)
-    #expectations=models.CharField(max_length=50,choices=Expectations,null=True)
     expectations=models.JSONField(default=list,blank=True)
     otherExpectations=models.TextField(max_length = 100,null=True,blank=True)
     comments=models.TextField(max_length=50)
