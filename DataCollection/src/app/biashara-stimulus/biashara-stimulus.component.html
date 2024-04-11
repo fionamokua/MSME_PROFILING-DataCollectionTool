@@ -84,8 +84,92 @@
             
                 <div class="businessLocation">
                     <h4 class="fs-subtitle radio-button-title">What is your Business Location?</h4>
-                    <input formControlName="subcounty" type="text" placeholder="Sub County">
-                    <input formControlName="ward" type="text" placeholder="Ward">
+
+
+                    <!-- <input formControlName="subcounty" type="text" placeholder="Sub County">
+                    <input formControlName="ward" type="text" placeholder="Ward"> -->
+                    <ng-select formControlName="subcounty" [items]="SubCountiesList" bindLabel="label" bindValue="value" placeholder="Select your SubCounty"></ng-select>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Dagoretti North'">
+                      <ng-select formControlName="ward" [items]="DagorettiNorthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Dagoretti South'">
+                      <ng-select formControlName="ward" [items]="DagorettiSouthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Kibra'">
+                      <ng-select formControlName="ward" [items]="KibraWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Langata'">
+                      <ng-select formControlName="ward" [items]="LangataWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Westlands'">
+                      <ng-select formControlName="ward" [items]="WestlandsWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Roysambu'">
+                      <ng-select formControlName="ward" [items]="RoysambuWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Kasarani'">
+                      <ng-select formControlName="ward" [items]="KasaraniWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Ruaraka'">
+                      <ng-select formControlName="ward" [items]="RuarakaWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Embakasi South'">
+                      <ng-select formControlName="ward" [items]="EmbakasiSouthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Embakasi North'">
+                      <ng-select formControlName="ward" [items]="EmbakasiNorthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Embakasi Central'">
+                      <ng-select formControlName="ward" [items]="EmbakasiCentralWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Embakasi East'">
+                      <ng-select formControlName="ward" [items]="EmbakasiEastWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Embakasi West'">
+                      <ng-select formControlName="ward" [items]="EmbakasiWestWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Makadara'">
+                      <ng-select formControlName="ward" [items]="MakadaraWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Kamukunji'">
+                      <ng-select formControlName="ward" [items]="KamukunjiWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Starehe'">
+                      <ng-select formControlName="ward" [items]="StareheWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+                    <div *ngIf="businessIndivual.controls['subcounty'].value==='Mathare'">
+                      <ng-select formControlName="ward" [items]="MathareWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
                     <input formControlName="building" type="text" placeholder="Building">
                     <input formControlName="street" type="text" placeholder="Street">
                     <input formControlName="landmark" type="text" placeholder="Landmark">
@@ -274,7 +358,7 @@
                  <div class="GroupActivities checkboxContainer">
 
                         <!-- checkboxes group activities -->
-                    <ng-select formControlName="groupActivities" [multiple]="true" [closeOnSelect]="false" [searchable]="true" (change)="onGroupActivitiesChange($event)">
+                    <ng-select formControlName="groupActivities" [multiple]="true" [closeOnSelect]="false" [searchable]="true" (change)="onGroupActivitiesChange($event)" placeholder="Select business activity">
                           <ng-option *ngFor="let option of groupActivitiesOptions" [value]="option.id">{{ option.name }}</ng-option>
                     </ng-select>
                        <!--end of checkboxes group activities -->
@@ -284,7 +368,6 @@
                         <h4 class="fs-subtitle radio-button-title">What are other group activities</h4>
                         <input formControlName="othergroupActivites" type="text">
                     </div>
-
                 </div>
 
 
@@ -295,8 +378,7 @@
                     <h4 class="fs-subtitle radio-button-title">What positive outcomes or changes do you expect for your business as a beneficiary of Biashara Stimulus Program?</h4>
                     <div class="checkboxContainer">
                          <!-- checkbox box outcomes -->
-                <ng-select formControlName="expectations" [multiple]="true" [closeOnSelect]="false" [searchable]="true"  (change)="onExpectationChange($event)">
-                    <ng-option [value]="null" disabled>Choose</ng-option>
+                <ng-select formControlName="expectations" [multiple]="true" [closeOnSelect]="false" [searchable]="true"  (change)="onExpectationChange($event)" placeholder="Select business outcome">
                     <ng-option *ngFor="let option of businessOutcomeOptions" [value]="option.id">{{ option.name }}</ng-option>
                 </ng-select>
                         <!--end of checkboxes business outcome -->
