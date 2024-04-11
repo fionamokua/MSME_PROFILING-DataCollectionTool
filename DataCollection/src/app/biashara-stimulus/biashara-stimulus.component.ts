@@ -195,15 +195,6 @@ export class BiasharaStimulusComponent implements OnInit {
     ];
 
 
-
-
-
-
-
-
-
-
-
   //CHECKBOXES FOR GROUP ACTIVTIES & BUSINESS OUTCOMES
   groupActivitiesOptions =[
     { id: 'carWash', name: 'Car Wash' },
@@ -340,14 +331,11 @@ export class BiasharaStimulusComponent implements OnInit {
       //checkbox2
       expectations:[[]],
       otherExpectations:['',],
-      
       comments:['',],
-
 
     })
   
   }
-
 
   onExpectationChange(selectedValues: any[]) {
     this.showOtherOutcomeInputs = selectedValues.includes('otherThingsExpected');
@@ -383,58 +371,5 @@ export class BiasharaStimulusComponent implements OnInit {
     console.log('Personal Details:', this.personalDetails.value);
 
   }
-
-  
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   // carWash: [false],
-        // metalWorks: [false],
-        // fishMongering: [false],
-        // healthCare:[false],
-        // wasteRecyclers:[false],
-        // tailoringBasketMaking:[false],
-        // hawking:[false],
-        // juiceMaking:[false],
-        // salonNail:[false],
-        // chickenFarming:[false],
-        // Mechanics:[false],
-        // shoeShiners:[false],
-        // catering:[false],
-        // bodaboda:[false],
-        // leatherShoeMakers:[false],
-        // cleaningServices:[false],
-        // artAndEntertainment:[false],
-        // dayCare:[false],
-        // masonry:[false],
-        // textile:[false],
-        // juakali:[false],
-        // generalMerchandise:[false],
-        // other:[false],
-
-
-
-
-        // increasedCapital:[false],
-        // accessToCustomers:[false],
-        // enhancedBusiness:[false],
-        // businessIncome:[false],
-        // employmentOpportunities:[false],
-        // betterLivelihood:[false],
-        // otherThingsExpected:[false],
-
-
 
 }
