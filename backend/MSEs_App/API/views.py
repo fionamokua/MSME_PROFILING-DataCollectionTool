@@ -105,7 +105,7 @@ class MSEProfilingDetailViewSet(viewsets.ViewSet):
                 if registration_certificate: 
                     return Response({"error": "Registration certificate is required for only those whose business is registered."},
                             status=status.HTTP_400_BAD_REQUEST)
-        if not explain:
+                if not explain:
                     return Response({"error": "If business is not registered, explain why is required."},
                                 status=status.HTTP_400_BAD_REQUEST)
         if  participatedintradefair == "Yes" and not tradefairParticipation:

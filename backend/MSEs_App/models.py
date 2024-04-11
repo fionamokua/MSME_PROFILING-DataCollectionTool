@@ -104,9 +104,10 @@ class MSEData(models.Model):
         regex=r'^0\d{9}$',  # Regular expression: starts with 0, followed by 9 digits
         message='Phone number must start with 0 and have a total of 10 digits.'
     )
-    
+   
     fullName = models.CharField(max_length=255)
-    identificationNumber = models.IntegerField(null=True)
+    identificationNumber = models.IntegerField(primary_key=True,default=0)
+    #identificationNumber=models.IntegerField(null=True)
     gender=models.CharField(max_length=25,choices=Gender)
     other_gender = models.CharField(max_length=25,blank=True)
     disabilityStatus=models.CharField(max_length=25,choices=STATUS)
@@ -125,7 +126,7 @@ class MSEData(models.Model):
     landmark=models.CharField(max_length=20)
     businessSector=models.CharField(max_length=25,choices=SectorofBusiness,null=True)
     natureofBusiness=models.TextField(max_length=50)
-    numbofEmployees=models.IntegerField()
+    numbofEmployees=models.CharField(max_length=25,choices=NumberofEmployees)
     lengthofOperations=models.CharField(max_length=40,choices=LengthOfBusinessOperations)
     challenges=models.TextField(max_length=100,choices=BusinessChallenges,null=True)
     otherChallenges=models.TextField(max_length=100,null=True,blank=True)
@@ -137,8 +138,8 @@ class MSEData(models.Model):
     participatedintradefair=models.CharField(max_length=25,choices=STATUS)
     tradefairParticipation=models.CharField(max_length=25,choices=TradefairParticipation,null=True)
     capacityBuildingTraining=models.CharField(max_length=25,choices=STATUS)
-    capacityTrainingParticipation=models.CharField(max_length=25,choices=CapacityBuildingTraining ,null=True)
-    isGroupRegistered=models.CharField(max_length=25,choices=STATUS,null=True)
+    capacityTrainingParticipation=models.CharField(max_length=25,choices=CapacityBuildingTraining ,null=True,blank=True)
+    isGroupRegistered=models.CharField(max_length=25,choices=STATUS,null=True,blank=True)
     groupName=models.CharField(max_length=20)
     year_registered=models.IntegerField(blank=True,null=True,validators=[MinValueValidator(2000), MaxValueValidator(datetime.date.today().year)])
     chairpersonsContact=models.CharField(max_length=20)
@@ -148,7 +149,8 @@ class MSEData(models.Model):
     groupRegCert=models.FileField(upload_to='media/groupCertificate/', blank=True, null=True)
     groupActivities = models.JSONField(default=list,blank=True)
     othergroupActivites=models.TextField(max_length=100,null=True,blank=True)
-    expectations=models.CharField(max_length=50,choices=Expectations,null=True)
+    #expectations=models.CharField(max_length=50,choices=Expectations,null=True)
+    expectations=models.JSONField(default=list,blank=True)
     otherExpectations=models.TextField(max_length = 100,null=True,blank=True)
     comments=models.TextField(max_length=50)
     
