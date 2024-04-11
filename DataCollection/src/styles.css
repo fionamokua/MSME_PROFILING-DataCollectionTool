@@ -9,5 +9,10 @@ body {
     background-size: cover;
     /* background-repeat: no-repeat; */
 }
+.container{
+    max-width: 1140px;
+    padding-top: 10px;
+   
+}
 
 
