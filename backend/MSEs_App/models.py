@@ -52,25 +52,25 @@ class MSEData(models.Model):
     ]
     NumberofEmployees = [
         ("1-10","1-10"),
-        ("11-50 ","11-50")
+        ("11-50","11-50")
                          ]
     LengthOfBusinessOperations = [
-        ("0-6 months","0-6 months"),
-        ("6-12 months","6-12 months"),
-        ("1-2 years","1-2 years"),
-        ("2-3 years","2-3 years"),
-        ("3 Years and above","3 years and above"),
+        ("0-6 Months","0-6 Months"),
+        ("1-2 Years","1-2 Years"),
+        ("2-3 Years","2-3 Years"),
+        ("3 Years and Above","3 Years and Above"),
         
     ]
     BusinessChallenges=[
         ("Inadequate access to affordable capital", "Inadequate access to affordable capital"),
         ("Limited market access", "Limited market access"),
-         ("Inadequate business/ entrepreneur skills", "Inadequate business/ entrepreur skills"),
+         ("Inadequate business/ entrepreneur skills", "Inadequate business/ entrepreneur skills"),
          ("other", "other")        
     ]
     SourceofCapital=[
         ("Own Savings", "Own Savings"),
         ("Family/Friend support", "Family/Friend support"),
+        
         ("Chama", "Chama"),
         ("Loan", "Loan"),
     ]
@@ -94,25 +94,27 @@ class MSEData(models.Model):
     Expectations=[
         ("Increased working capital","Increase working capital"),
         ("Access to more customers","Access to more customers"),
-        ("Enhanced business/ entrepreneurial skills","Enhanced business/  entrepreneurial skills"),
+        ("Enhanced business/ entrepreneur skills","Enhanced business/  entrepreneur skills"),
         (" Increased business income ","Increased business income"),
         (" More employment opportunities","More employment opportunities"),
         (" Better livelihood","Better livelihood"),
         ("Other","Other")
+      
     ]
     phone_number_validator = RegexValidator(
         regex=r'^0\d{9}$',  # Regular expression: starts with 0, followed by 9 digits
         message='Phone number must start with 0 and have a total of 10 digits.'
     )
    
+   
     fullName = models.CharField(max_length=255)
-    identificationNumber = models.IntegerField(primary_key=True,default=0)
-    #identificationNumber=models.IntegerField(null=True)
+    # identificationNumber = models.IntegerField(primary_key=True,default=0)
+    identificationNumber=models.IntegerField(null=True)
     gender=models.CharField(max_length=25,choices=Gender)
     other_gender = models.CharField(max_length=25,blank=True)
     disabilityStatus=models.CharField(max_length=25,choices=STATUS,default=False,null=True)
     email = models.EmailField(unique=True)
-    phoneNumber= models.CharField(max_length=20,validators=[phone_number_validator])
+    phoneNumber= models.CharField(max_length=20)
     passportPhoto=models.FileField(upload_to='media/passport/')
     nationalIDPhoto=models.FileField(upload_to="media/nationalid/")
     businessName=models.CharField(max_length=30)

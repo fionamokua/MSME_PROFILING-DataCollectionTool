@@ -9,6 +9,7 @@ pillow = "*"
 psycopg2 = "*"
 djangorestframework = "*"
 django-multiselectfield = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
