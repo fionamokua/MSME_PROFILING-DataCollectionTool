@@ -4,7 +4,7 @@ import { MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { BiasharaDataCollectionServiceService } from '../_services/biashara-data-collection-service.service';
 
@@ -24,10 +24,16 @@ export class BiasharaStimulusComponent implements OnInit {
   businessGroup!:FormGroup;
 
 
+  personal_step = false;
+  businessIndividual_step = false;
+  businessGroup_step = false;
+
+
+  step = 1;
+
+
   showOtherOutcomeInputs:boolean =false;
   showOtherGroupActivities:boolean = false;
-
-
 
 
   //SUB COUNTY AND WARDS
@@ -239,7 +245,7 @@ export class BiasharaStimulusComponent implements OnInit {
   ngOnInit(){
 
     this.personalDetails =this.formBuilder.group({
-      fullName: ['',],
+      fullName: ['', Validators.required],
       identificationNumber:['',],
       gender:['', ],
       other_gender:['',],
@@ -350,6 +356,59 @@ export class BiasharaStimulusComponent implements OnInit {
       this.businessGroup.get('otherGroupActivities')?.reset(); // Reset the other expectation input field
     }
   }
+
+
+
+
+  get personal() {
+    return this.personalDetails.controls;
+  }
+
+  get address() {
+    return this.businessIndivual.controls;
+  }
+
+  get membership() {
+    return this.businessGroup.controls;
+  }
+
+
+
+  next() {
+    if (this.step == 1) {
+      this.personal_step = true;
+      // if (this.personalDetails.invalid) {
+      //   return;
+      // }
+      this.step++;
+    }else if(this.step ==2){
+      this.businessIndividual_step=true;
+      this.step++;
+    }else{
+      this.businessGroup_step =true;
+    }
+
+
+  //   if (this.step == 2) {
+  //     this.businessIndividual_step = true;
+  //     // if (this.businessIndivual.invalid) {
+  //     //   return;
+  //     // }
+  //     this.step++;
+  //   }
+   }
+
+  previous() {
+    this.step--;
+    if (this.step == 1) {
+      this.personal_step = false;
+    }
+    if (this.step == 2) {
+      this.businessGroup_step = false;
+    }
+  }
+
+
 
 
 
