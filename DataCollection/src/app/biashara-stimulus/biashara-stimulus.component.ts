@@ -17,9 +17,11 @@ import { BiasharaDataCollectionServiceService } from '../_services/biashara-data
   templateUrl: './biashara-stimulus.component.html',
   styleUrl: './biashara-stimulus.component.css'
 })
+
+
 export class BiasharaStimulusComponent implements OnInit {
 
-  personalDetails!:FormGroup;
+  personalDetails!: FormGroup;
   businessIndivual!:FormGroup;
   businessGroup!:FormGroup;
 
@@ -245,15 +247,15 @@ export class BiasharaStimulusComponent implements OnInit {
   ngOnInit(){
 
     this.personalDetails =this.formBuilder.group({
-      fullName: ['', Validators.required],
-      identificationNumber:['',],
-      gender:['', ],
-      other_gender:['',],
-      disabilityStatus:['',],
-      email:['',],
-      phoneNumber:['',],
-      passportPhoto:['',],
-      nationalIDPhoto:['',],
+      fullName: ['', Validators.required, Validators.minLength(5)],
+      identificationNumber:['', Validators.required],
+      gender:['', 'True', Validators.required],
+      other_gender:['',Validators.required],
+      disabilityStatus:['', 'True', Validators.required],
+      email:['', Validators.required],
+      phoneNumber:['', Validators.required],
+      passportPhoto:['', Validators.required],
+      nationalIDPhoto:['', Validators.required],
     });
 
     this.personalDetails.get('gender')?.valueChanges.subscribe(value=>{
@@ -264,30 +266,30 @@ export class BiasharaStimulusComponent implements OnInit {
     });
 
     this.businessIndivual=this.formBuilder.group({
-      businessName:['',],
-      isbusinessRegistered:['',],
+      businessName:['', Validators.required],
+      isbusinessRegistered:['',Validators.required],
       registrationCertificate:null,
-      explainWhy:['',],
-      subcounty:['',],
-      ward:['',],
-      building:['',],
-      street:['',],
-      landmark:['',],
-      businessSector:['',],
-      natureofBusiness:['',],
-      numbofEmployees:['',],
-      lengthofOperations:['',],
-      challenges:['',],
-      otherChallenges:['',],
-      awareofProgram:['',],
-      sourceofCapital:['',],
-      capitalisAdequate:['',],
-      marketingProducts:['',],
-      targetMarket:['',],
-      participatedintradefair:['',],
-      tradefairParticipation:['',],
-      capacityBuildingTraining:['',],
-      capacityTrainingParticipation:['',]
+      explainWhy:['', Validators.required],
+      subcounty:['', Validators.required],
+      ward:['', Validators.required],
+      building:['', Validators.required],
+      street:['', Validators.required],
+      landmark:['',Validators.required],
+      businessSector:['', Validators.required],
+      natureofBusiness:['', Validators.required],
+      numbofEmployees:['', Validators.required],
+      lengthofOperations:['', Validators.required],
+      challenges:['', Validators.required],
+      otherChallenges:['', Validators.required],
+      awareofProgram:['', Validators.required],
+      sourceofCapital:['', Validators.required],
+      capitalisAdequate:['', Validators.required],
+      marketingProducts:['', Validators.required],
+      targetMarket:['', Validators.required],
+      participatedintradefair:['', Validators.required],
+      tradefairParticipation:['', Validators.required],
+      capacityBuildingTraining:['', Validators.required],
+      capacityTrainingParticipation:['', Validators.required],
     });
 
 
@@ -322,12 +324,12 @@ export class BiasharaStimulusComponent implements OnInit {
 
 
     this.businessGroup=this.formBuilder.group({
-      isGroupRegistered:['',],
-      groupName:['',],
-      year_registered:['',],
-      chairpersonsContact:['',],
-      numberofGroupmemb:['',],
-      listOfGroupmembers:['',],
+      isGroupRegistered:['', Validators.required],
+      groupName:['', Validators.required],
+      year_registered:['', Validators.required],
+      chairpersonsContact:['', Validators.required],
+      numberofGroupmemb:['', Validators.required],
+      listOfGroupmembers:['', Validators.required],
       groupConsitution:null,
       groupRegCert:null,
 
@@ -408,10 +410,6 @@ export class BiasharaStimulusComponent implements OnInit {
     }
   }
 
-
-
-
-
   onSubmit(){
 
     //sending data to the backend
@@ -424,7 +422,6 @@ export class BiasharaStimulusComponent implements OnInit {
     // })
 
 
- 
     console.log('Business (Individual):', this.businessIndivual.value);
     console.log('Business (Group/Organization):', this.businessGroup.value);
     console.log('Personal Details:', this.personalDetails.value);

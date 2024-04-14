@@ -14,40 +14,60 @@
 
             <fieldset  *ngIf="step == 1">
                 <h2 class="fs-title">Personal Details</h2>
-                <input type="text" formControlName="fullName" placeholder="Full Names" />
+                <input type="text" formControlName="fullName" placeholder="Full Names" class="form-control" [ngClass]="{'is-invalid': personal_step && personal['fullName'].errors }" placeholder="Full Name"/>
+                <div *ngIf="personal_step && personalDetails.controls['fullName'].errors">
+                    <div *ngIf="personal['fullName'].errors?.['required']">Full Name is required</div>
+                </div>
 
-                <input type="number" formControlName="identificationNumber" placeholder="Identification Number" />
+                <!-- <div class="text-danger" *ngIf="personalDetails.controls['fullName].invalid && (personalDetails.controls['fullName'].touched||personalDetails.controls['fullName'].dirty)">
+                <div *ngIf="personalDetails.controls['fullName'].errors?.['required']"> Full Name Required </div>
+                <div *ngIf="personalDetails['fullName"].errors?.['minlength']"> Minimum 5 characters required </div>
+                 -->
+
+                <input type="number" class="form-control" formControlName="identificationNumber" placeholder="Identification Number" />
+                <div *ngIf="personal_step && personalDetails.controls['identificationNumber'].errors">
+                    <div *ngIf="personal['identificationNumber'].errors?.['required']">ID Number is required</div>
+                </div>
                 <div class="gender">
                     <h4 class="radio-button-title">Gender</h4>
-                    <mat-radio-group formControlName="gender" class="radio-group-options" aria-label="Select an option">
+                    <mat-radio-group class="form-control" formControlName="gender" class="radio-group-options" aria-label="Select an option">
                         <mat-radio-button value="male">Male</mat-radio-button>
                         <mat-radio-button value="female">Female</mat-radio-button>
                         <mat-radio-button value="other">Other</mat-radio-button>
                     </mat-radio-group>
             
                     <div class="matFormInput" *ngIf="personalDetails.get('gender')?.value === 'other'">
-                        <input formControlName="other_gender" placeholder="">
+                        <input class="form-control" formControlName="other_gender"  placeholder="">
                     </div>
                 </div>
             
             
                 <div class="disability-status">
                     <h4 class="radio-button-title">Disability Status</h4>
-                    <mat-radio-group formControlName="disabilityStatus" class="radio-group-options" aria-label="Select an option">
+                    <mat-radio-group  class="form-control" formControlName="disabilityStatus" class="radio-group-options" aria-label="Select an option">
                         <mat-radio-button value="yes">Yes</mat-radio-button>
                         <mat-radio-button value="no">No</mat-radio-button>
                     </mat-radio-group>
                 </div>
             
-                <input type="email" formControlName="email" placeholder="Email" />
-                <input type="number" formControlName="phoneNumber" placeholder="Phone Number" />
+                <input type="email" class="form-control" formControlName="email" placeholder="Email" />
+                <div *ngIf="personal_step && personalDetails.controls['email'].errors">
+                    <div *ngIf="personal['email'].errors?.['required']">Email is required</div>
+                    <div *ngIf="personal['email'].errors?.['email']">Email is invalid</div>
+                </div>
+
+                <input type="number" class="form-control" formControlName="phoneNumber" placeholder="Phone Number" />
+                <div *ngIf="personal_step && personalDetails.controls['phoneNumber'].errors">
+                    <div *ngIf="personal['phoneNumber'].errors?.['required']">Phone Number is required</div>
+                    <div *ngIf="personal['phoneNumber'].errors?.['pattern']">Phone Number is invalid</div>
+                    </div>
             
                 <div class="photo-upload">
                     <h4 class="fs-subtitle radio-button-title">Upload your passport photo</h4>
-                    <input formControlName="passportPhoto" class="file-upload" type="file">
+                    <input class="form-control" formControlName="passportPhoto" class="file-upload" type="file">
             
                     <h4 class="fs-subtitle radio-button-title">Upload a copy of your National ID</h4>
-                    <input formControlName="nationalIDPhoto" class="file-upload" type="file">
+                    <input class="form-control" formControlName="nationalIDPhoto" class="file-upload" type="file">
                 </div>
 
 
@@ -64,11 +84,11 @@
             <fieldset  *ngIf="step == 2">
                 <h2 class="fs-title">Business Specifics (Individual)</h2>
                 <!-- <h4 class="fs-subtitle radio-button-title">What is your Business Name</h4> -->
-                <input type="text" formControlName="businessName" placeholder="Business Name">
+                <input type="text" class="form-control" formControlName="businessName" placeholder="Business Name">
             
                 <div class="businessRegisteration">
                     <h4 class="fs-subtitle radio-button-title">Is your business registered</h4>
-                    <mat-radio-group formControlName="isbusinessRegistered" class="radio-group-options"
+                    <mat-radio-group  class="form-control" formControlName="isbusinessRegistered" class="radio-group-options"
                         aria-label="Select an option">
                         <mat-radio-button value="yes">Yes</mat-radio-button>
                         <mat-radio-button value="no">No</mat-radio-button>
@@ -80,12 +100,12 @@
             
                 <div class="registerationCertificate"  *ngIf="businessIndivual.get('isbusinessRegistered')?.value === 'yes'">
                     <h4 class="fs-subtitle radio-button-title">If yes attach the certificate of registration</h4>
-                    <input formControlName="registrationCertificate" class="file-upload" type="file">
+                    <input class="form-control" formControlName="registrationCertificate" class="file-upload" type="file">
                     </div>
 
                 <div class="explainwhy" *ngIf="businessIndivual.get('isbusinessRegistered')?.value === 'no'" >
                     <h4 class="fs-subtitle radio-button-title">If no explain why</h4>
-                    <input formControlName="explainWhy" type="text" placeholder="">
+                    <input class="form-control" formControlName="explainWhy" type="text" placeholder="">
                 </div>
             
                 <div class="businessLocation">
@@ -94,96 +114,85 @@
 
                     <!-- <input formControlName="subcounty" type="text" placeholder="Sub County">
                     <input formControlName="ward" type="text" placeholder="Ward"> -->
-                    <ng-select formControlName="subcounty" [items]="SubCountiesList" bindLabel="label" bindValue="value" placeholder="Select your SubCounty"></ng-select>
+                    <ng-select class="form-control" formControlName="subcounty" [items]="SubCountiesList" bindLabel="label" bindValue="value" placeholder="Select your SubCounty"></ng-select>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Dagoretti North'">
-                      <ng-select formControlName="ward" [items]="DagorettiNorthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="DagorettiNorthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Dagoretti South'">
-                      <ng-select formControlName="ward" [items]="DagorettiSouthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="DagorettiSouthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Kibra'">
-                      <ng-select formControlName="ward" [items]="KibraWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select  class="form-control" formControlName="ward" [items]="KibraWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Langata'">
-                      <ng-select formControlName="ward" [items]="LangataWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="LangataWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Westlands'">
-                      <ng-select formControlName="ward" [items]="WestlandsWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" class="form-control" formControlName="ward" [items]="WestlandsWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Roysambu'">
-                      <ng-select formControlName="ward" [items]="RoysambuWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="RoysambuWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Kasarani'">
-                      <ng-select formControlName="ward" [items]="KasaraniWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="KasaraniWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Ruaraka'">
-                      <ng-select formControlName="ward" [items]="RuarakaWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="RuarakaWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Embakasi South'">
-                      <ng-select formControlName="ward" [items]="EmbakasiSouthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="EmbakasiSouthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Embakasi North'">
-                      <ng-select formControlName="ward" [items]="EmbakasiNorthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="EmbakasiNorthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Embakasi Central'">
-                      <ng-select formControlName="ward" [items]="EmbakasiCentralWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="EmbakasiCentralWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Embakasi East'">
-                      <ng-select formControlName="ward" [items]="EmbakasiEastWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="EmbakasiEastWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Embakasi West'">
-                      <ng-select formControlName="ward" [items]="EmbakasiWestWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="EmbakasiWestWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Makadara'">
-                      <ng-select formControlName="ward" [items]="MakadaraWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="MakadaraWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Kamukunji'">
-                      <ng-select formControlName="ward" [items]="KamukunjiWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="KamukunjiWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Starehe'">
-                      <ng-select formControlName="ward" [items]="StareheWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="StareheWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
                     <div *ngIf="businessIndivual.controls['subcounty'].value==='Mathare'">
-                      <ng-select formControlName="ward" [items]="MathareWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
+                      <ng-select class="form-control" formControlName="ward" [items]="MathareWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-                    <input formControlName="building" type="text" placeholder="Building">
-                    <input formControlName="street" type="text" placeholder="Street">
-                    <input formControlName="landmark" type="text" placeholder="Landmark">
+                    <input class="form-control" formControlName="building" type="text" placeholder="Building">
+                    <input class="form-control" formControlName="street" type="text" placeholder="Street">
+                    <input class="form-control" formControlName="landmark" type="text" placeholder="Landmark">
                 </div>
             
                 <div class="businessSector">
                     <h4 class="fs-subtitle radio-button-title">Sector of the business</h4>
-                    <mat-radio-group formControlName="businessSector" class="radio-group-options" aria-label="Select an option">
+                    <mat-radio-group formControlName="businessSector" class="form-control" class="radio-group-options" aria-label="Select an option">
                         <mat-radio-button value="retail">Retail</mat-radio-button>
                         <mat-radio-button value="wholesale">Wholesale</mat-radio-button>
                         <mat-radio-button value="service">Service</mat-radio-button>
@@ -191,14 +200,14 @@
                     </mat-radio-group>
                     <div class="specifyBusiness" >
                         <h4 class="fs-subtitle radio-button-title">What is the nature of the business (Specify)?</h4>
-                        <input formControlName="natureofBusiness" type="text" placeholder="">
+                        <input class="form-control" formControlName="natureofBusiness" type="text" placeholder="">
                     </div>
                     
                 </div>
             
                 <div class="employees">
                     <h4 class="fs-subtitle radio-button-title">Number of employees</h4>
-                    <mat-radio-group formControlName="numbofEmployees" class="radio-group-options" aria-label="Select an option">
+                    <mat-radio-group class="form-control" formControlName="numbofEmployees" class="radio-group-options" aria-label="Select an option">
                         <mat-radio-button value="1-10">1-10</mat-radio-button>
                         <mat-radio-button value="11-50">11-50</mat-radio-button>
                     </mat-radio-group>
@@ -208,7 +217,7 @@
                     <h4 class="fs-subtitle radio-button-title">How long has your business been in operation?</h4>
                     <mat-form-field class="matFormField">
                         <mat-label>Choose</mat-label>
-                        <mat-select formControlName="lengthofOperations">
+                        <mat-select class="form-control" formControlName="lengthofOperations">
                             <mat-option value="0-6 Months">0-6 Months</mat-option>
                             <mat-option value="6-12 Months">6-12 Months</mat-option>
                             <mat-option value="1-2 Years">1-2 Years</mat-option>
@@ -222,7 +231,7 @@
                         <div class="challenges" >
                             <h4 class="fs-subtitle radio-button-title">What are the primary challenges your business currently
                                 faces?</h4>
-                            <mat-radio-group formControlName="challenges" class="radio-group-options" aria-label="Select an option">
+                            <mat-radio-group class="form-control" formControlName="challenges" class="radio-group-options" aria-label="Select an option">
                                 <mat-radio-button value="Inadequate access to affordable capital">Inadequate access to affordable capital</mat-radio-button>
                                 <mat-radio-button value="Limited market access">Limited market access</mat-radio-button>
                                 <mat-radio-button value="Inadequate business/ entrepreneur skills">Inadequate business/ entrepreneur skills</mat-radio-button>
@@ -239,7 +248,7 @@
                 <div class="biasharaStimulusProgramme">
                     <h4 class="fs-subtitle radio-button-title">Are you aware of Nairobi City County Biashara Stimulus
                         Program?</h4>
-                    <mat-radio-group formControlName="awareofProgram" class="radio-group-options" aria-label="Select an option">
+                    <mat-radio-group class="form-control" formControlName="awareofProgram" class="radio-group-options" aria-label="Select an option">
                         <mat-radio-button value="yes">Yes</mat-radio-button>
                         <mat-radio-button value="no">No</mat-radio-button>
                     </mat-radio-group>
@@ -247,7 +256,7 @@
             
                 <div class="sourceOfCapital">
                     <h4 class="fs-subtitle radio-button-title">What is your source of capital?</h4>
-                    <mat-radio-group formControlName="sourceofCapital" class="radio-group-options" aria-label="Select an option">
+                    <mat-radio-group class="form-control" formControlName="sourceofCapital" class="radio-group-options" aria-label="Select an option">
                         <mat-radio-button value="Own savings">Own savings</mat-radio-button>
                         <mat-radio-button value="Family/Friend support">Family/Friend support</mat-radio-button>
                         <mat-radio-button value="Chama">Chama</mat-radio-button>
@@ -258,7 +267,7 @@
                 <div class="capitalAdequate">
                     <h4 class="fs-subtitle radio-button-title">Is the capital adequate for expansion for your business?
                     </h4>
-                    <mat-radio-group formControlName="capitalisAdequate" class="radio-group-options" aria-label="Select an option">
+                    <mat-radio-group class="form-control" formControlName="capitalisAdequate" class="radio-group-options" aria-label="Select an option">
                         <mat-radio-button value="yes">Yes</mat-radio-button>
                         <mat-radio-button value="no">No</mat-radio-button>
                     </mat-radio-group>
@@ -266,7 +275,7 @@
             
                 <div class="marketProducts">
                     <h4 class="fs-subtitle radio-button-title">How do you market your products?</h4>
-                    <mat-radio-group formControlName="marketingProducts" class="radio-group-options" aria-label="Select an option">
+                    <mat-radio-group class="form-control" formControlName="marketingProducts" class="radio-group-options" aria-label="Select an option">
                         <mat-radio-button value="virtual">Virtual</mat-radio-button>
                         <mat-radio-button value="physical">Physical</mat-radio-button>
                         <mat-radio-button value="both">Both</mat-radio-button>
@@ -275,7 +284,7 @@
             
                 <div class="targetMarkets">
                     <h4 class="fs-subtitle radio-button-title">What are your target markets?</h4>
-                    <mat-radio-group formControlName="targetMarket" class="radio-group-options" aria-label="Select an option">
+                    <mat-radio-group class="form-control" formControlName="targetMarket" class="radio-group-options" aria-label="Select an option">
                         <mat-radio-button value="local">Local</mat-radio-button>
                         <mat-radio-button value="international">International</mat-radio-button>
                     </mat-radio-group>
@@ -283,7 +292,7 @@
             
                 <div class="tradeExhibition">
                     <h4 class="fs-subtitle radio-button-title">Have you participated in any trade fair/exhibition?</h4>
-                    <mat-radio-group formControlName="participatedintradefair" class="radio-group-options"
+                    <mat-radio-group class="form-control" formControlName="participatedintradefair" class="radio-group-options"
                         aria-label="Select an option">
                         <mat-radio-button value="yes">Yes</mat-radio-button>
                         <mat-radio-button value="no">No</mat-radio-button>
@@ -291,7 +300,7 @@
 
                     <div class="participated" *ngIf="businessIndivual.get('participatedintradefair')?.value === 'yes'">
                         <h4 class="fs-subtitle radio-button-title">If yes:</h4>
-                        <mat-radio-group formControlName="tradefairParticipation" class="radio-group-options"
+                        <mat-radio-group class="form-control" formControlName="tradefairParticipation" class="radio-group-options"
                             aria-label="Select an option">
                             <mat-radio-button value="self-sponsored">Self-sponsored</mat-radio-button>
                             <mat-radio-button value="sponsored">Sponsored</mat-radio-button>
@@ -302,7 +311,7 @@
             
                 <div class="capacityBuildingTraining">
                     <h4 class="fs-subtitle radio-button-title">Have you participated in any capacity building training?</h4>
-                    <mat-radio-group formControlName="capacityBuildingTraining" class="radio-group-options"
+                    <mat-radio-group  class="form-control" formControlName="capacityBuildingTraining" class="radio-group-options"
                         aria-label="Select an option">
                         <mat-radio-button value="yes">Yes</mat-radio-button>
                         <mat-radio-button value="no">No</mat-radio-button>
@@ -310,7 +319,7 @@
 
                     <div class="capacitybuilding" *ngIf="businessIndivual.get('capacityBuildingTraining')?.value === 'yes'" >
                         <h4 class="fs-subtitle radio-button-title">If yes:</h4>
-                        <mat-radio-group formControlName="capacityTrainingParticipation" class="radio-group-options"
+                        <mat-radio-group class="form-control" formControlName="capacityTrainingParticipation" class="radio-group-options"
                             aria-label="Select an option">
                             <mat-radio-button value="self-sponsored">Self-sponsored</mat-radio-button>
                             <mat-radio-button value="sponsored">Sponsored</mat-radio-button>
